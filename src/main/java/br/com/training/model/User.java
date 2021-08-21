@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,8 +31,19 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private LocalDate birthDate;
 
+	@Deprecated
+	public User(){
+	}
+
+	public User(String name, String email, String cpf, LocalDate birthDate) {
+		this.name = name;
+		this.email = email;
+		this.cpf = cpf;
+		this.birthDate = birthDate;
+	}
+
 	@Component
-	public class LocalDateSpringConverter implements Converter<String, LocalDate> {
+	public static class LocalDateSpringConverter implements Converter<String, LocalDate> {
 
 		@Override
 		public LocalDate convert(String value) {
