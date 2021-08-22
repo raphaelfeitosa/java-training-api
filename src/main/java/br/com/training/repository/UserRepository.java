@@ -9,5 +9,5 @@ import br.com.training.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByCpf(String cpf);
-
+    User findByEmail(String email);
 }
