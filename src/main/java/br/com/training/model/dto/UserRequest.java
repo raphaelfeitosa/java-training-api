@@ -2,25 +2,29 @@ package br.com.training.model.dto;
 
 import br.com.training.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 public class UserRequest {
 
-    @NotBlank(message = "O campo name é obrigatório")
+    @NotEmpty(message = "O campo name não pode ser vazio")
+    @NotNull(message = "O campo name não pode ser nulo")
     private String name;
 
-    @NotBlank(message = "O campo email é obrigatório")
+    @NotEmpty(message = "O campo email não pode ser vazio")
+    @NotNull(message = "O campo email não pode ser nulo")
     @Email(message = "E-mail inválido!")
     private String email;
 
-    @NotBlank(message = "O campo cpf é obrigatório")
+    @NotEmpty(message = "O campo cpf é não pode ser vazio")
+    @NotNull(message = "O campo cpf é não pode ser nulo")
     @CPF(message = "CPF ínválido")
     private String cpf;
 
-    @NotBlank(message = "O campo birthDate é obrigatorio")
+    @NotEmpty(message = "O campo birthDate não pode ser vazio. formato: yyyy-MM-dd")
+    @NotNull(message = "O campo birthDate não pode ser nulo. formato: yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String birthDate;
 
