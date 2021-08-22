@@ -33,10 +33,23 @@ public class UserController {
         return ResponseEntity.ok().body(updateUser);
     }
 
-    @GetMapping(value = "/{cpf}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserResponse> getUser(@PathVariable String cpf) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+        UserResponse userResponse = this.userService.findById(id);
+        return ResponseEntity.ok().body(userResponse);
+    }
+    @GetMapping(value = "/cpf/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserResponse> getUserByCpf(@PathVariable String cpf) {
         UserResponse userResponse = this.userService.findByCpf(cpf);
+        return ResponseEntity.ok().body(userResponse);
+    }
+
+    @GetMapping(value = "/email/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
+        UserResponse userResponse = this.userService.findByEmail(email);
         return ResponseEntity.ok().body(userResponse);
     }
 
