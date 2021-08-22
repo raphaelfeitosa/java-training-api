@@ -28,7 +28,7 @@ public class UserController {
 
     @PutMapping(value = "/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserResponse> updateUser(@Valid @PathVariable String cpf, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable String cpf, @Valid @RequestBody UserRequest userRequest) {
         UserResponse updateUser = this.userService.atualizar(cpf, userRequest);
         return ResponseEntity.ok().body(updateUser);
     }
