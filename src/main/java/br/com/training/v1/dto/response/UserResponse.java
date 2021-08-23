@@ -1,4 +1,4 @@
-package br.com.training.model.dto;
+package br.com.training.v1.dto.response;
 
 import br.com.training.model.User;
 

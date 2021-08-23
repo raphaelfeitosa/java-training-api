@@ -1,8 +1,8 @@
-package br.com.training.controller;
+package br.com.training.v1.controller;
 
-import br.com.training.model.dto.UserRequest;
-import br.com.training.model.dto.UserResponse;
-import br.com.training.service.UserService;
+import br.com.training.v1.dto.request.UserRequest;
+import br.com.training.v1.dto.response.UserResponse;
+import br.com.training.v1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

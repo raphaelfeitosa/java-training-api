@@ -1,4 +1,4 @@
-package br.com.training.model.dto;
+package br.com.training.v1.dto.request;
 
 import br.com.training.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;

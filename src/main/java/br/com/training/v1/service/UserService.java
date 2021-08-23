@@ -1,10 +1,10 @@
-package br.com.training.service;
+package br.com.training.v1.service;
 
 import br.com.training.model.User;
-import br.com.training.model.dto.UserRequest;
-import br.com.training.model.dto.UserResponse;
+import br.com.training.v1.dto.request.UserRequest;
+import br.com.training.v1.dto.response.UserResponse;
 import br.com.training.repository.UserRepository;
-import br.com.training.service.exceptions.UserException;
+import br.com.training.v1.service.exceptions.UserException;
 import br.com.training.v1.constant.MessagesConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
-package br.com.training.service;
+package br.com.training.v1.service;
 
-import br.com.training.model.dto.UserRequest;
-import br.com.training.model.dto.UserResponse;
+import br.com.training.v1.dto.request.UserRequest;
+import br.com.training.v1.dto.response.UserResponse;
 
 import java.util.List;
 
