@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 public class UserRequest {
 
@@ -26,8 +27,18 @@ public class UserRequest {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private String birthDate;
 
-    public User toUserCreate() {
-        return new User(name, email, cpf, new User.LocalDateSpringConverter().convert(birthDate));
+    public UserRequest(){
+    }
+
+    public UserRequest(String name, String email, String cpf, String birthDate) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+    }
+
+    public  User toUserCreate() {
+        return new User(this);
     }
 
     public User toUserUpdate(Long id) {
@@ -41,15 +52,31 @@ public class UserRequest {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCpf() {
         return cpf;
     }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }

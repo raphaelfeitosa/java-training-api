@@ -17,6 +17,16 @@ public class UserResponse {
 
     private LocalDate birthDate;
 
+    public UserResponse() {}
+
+    public UserResponse(Long id, String name, String email, String cpf, LocalDate birthDate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+    }
+
     public UserResponse(User user) {
         this.id = user.getId();
         this.name = user.getName();

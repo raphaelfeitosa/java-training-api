@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
 
+import br.com.training.v1.dto.request.UserRequest;
+import br.com.training.v1.dto.response.UserResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -31,15 +33,26 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private LocalDate birthDate;
 
-	@Deprecated
 	public User(){
 	}
 
-	public User(String name, String email, String cpf, LocalDate birthDate) {
+	public User(Long id, String name, String email, String cpf, LocalDate birthDate) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;
 		this.birthDate = birthDate;
+	}
+
+	public User(UserRequest userRequest) {
+		this.name = userRequest.getName();
+		this.email = userRequest.getEmail();
+		this.cpf = userRequest.getCpf();
+		this.birthDate =  new User.LocalDateSpringConverter().convert(userRequest.getBirthDate());
+	}
+
+	public UserResponse toResponse() {
+		return new UserResponse(this);
 	}
 
 	@Component
