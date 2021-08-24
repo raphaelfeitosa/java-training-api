@@ -28,8 +28,7 @@ public class UserService implements IUserService {
             if (this.userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
                 throw new UserException(MessagesConstant.ERROR_USER_EMAIL_REGISTERED.getValor(), HttpStatus.BAD_REQUEST);
             }
-            User newUser = this.userRepository.save(userRequest.toUserCreate());
-            return new UserResponse(newUser);
+            return this.userRepository.save(userRequest.toUserCreate()).toResponse();
         } catch (UserException userException) {
             throw userException;
         } catch (Exception exception) {
@@ -50,8 +49,7 @@ public class UserService implements IUserService {
             if (userEmail && !user.getEmail().equals(userRequest.getEmail())) {
                 throw new UserException(MessagesConstant.ERROR_USER_EMAIL_REGISTERED.getValor(), HttpStatus.BAD_REQUEST);
             }
-            User updatedUser = this.userRepository.save(userRequest.toUserUpdate(user.getId()));
-            return new UserResponse(updatedUser);
+            return this.userRepository.save(userRequest.toUserUpdate(user.getId())).toResponse();
         } catch (UserException userException) {
             throw userException;
         } catch (Exception exception) {
@@ -71,7 +69,7 @@ public class UserService implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserResponse findById(Long id) {
         try {
             User user = this.userRepository.findById(id)
@@ -84,7 +82,7 @@ public class UserService implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserResponse findByCpf(String cpf) {
         try {
             User user = this.userRepository.findByCpf(cpf)
@@ -97,7 +95,7 @@ public class UserService implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserResponse findByEmail(String email) {
         try {
             User user = this.userRepository.findByEmail(email)
@@ -110,7 +108,7 @@ public class UserService implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<UserResponse> findAll() {
         try {
             List<User> userList = this.userRepository.findAll();
