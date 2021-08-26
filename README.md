@@ -158,6 +158,89 @@ Recursos disponíveis para acesso via api: `http://localhost:8080/api/v1`
     ```
 - Response 401 (Unauthorized)
 
+### Atualizar usuário por CPF
+
+**PUT:** `http://localhost:8080/api/v1/users/{cpf}` com *body*:
+
+- Request (application/json)
+    ```json
+    {
+      "name":"John Doe de Souza",
+      "cpf":"66921484050",
+      "email":"johndoe@gmail.com",
+      "birthDate":"1989-09-29"
+    }
+    ```
+
+- Response 200 (Created)
+    ```json
+    {
+      "id": 1,
+      "name": "John Doe de Souza",
+      "email": "johndoe@gmail.com",
+      "cpf": "66921484050",
+      "birthDate": "1989-09-29"
+    }
+    ```
+  
+- Response 400 (Bad Request) - Cadastro existente com cpf
+    ```json
+    {
+      "timestamp": "2021-08-25T18:55:40Z",
+      "code": 400,
+      "status": "BAD_REQUEST",
+      "message": "CPF already registered.",
+      "path": "/api/v1/users",
+      "errors": []
+    }
+    ```
+  
+- Response 400 (Bad Request) - Cadastro existente com email
+    ```json
+    {
+      "timestamp": "2021-08-25T18:55:40Z",
+      "code": 400,
+      "status": "BAD_REQUEST",
+      "message": "Email already registered.",
+      "path": "/api/v1/users",
+      "errors": []
+    }
+    ```
+  
+- Response 400 (Bad Request) - Erros na validação
+    ```json
+    {
+      "timestamp": "2021-08-25T18:56:29Z",
+      "code": 400,
+      "status": "BAD_REQUEST",
+      "message": "Error validation",
+      "path": "/api/v1/users",
+      "errors": [
+        {
+          "fieldName": "name",
+          "message": "O campo name é obrigatório"
+        },
+        {
+          "fieldName": "birthDate",
+          "message": "O campo birthDate é obrigatório. formato: yyyy-MM-dd"
+        },
+        {
+          "fieldName": "email",
+          "message": "O campo email é obrigatório"
+        },
+        {
+          "fieldName": "cpf",
+          "message": "CPF inválido"
+        },
+        {
+          "fieldName": "cpf",
+          "message": "O campo cpf é obrigatório"
+        }
+      ]
+    }
+    ```
+- Response 401 (Unauthorized)
+
 ### Obter usuário com CPF
 
 **GET:** `http://localhost:8080/api/v1/users/cpf/{cpf}` vai retornar:
