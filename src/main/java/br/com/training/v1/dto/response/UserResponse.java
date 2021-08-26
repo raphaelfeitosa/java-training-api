@@ -1,20 +1,26 @@
 package br.com.training.v1.dto.response;
 
 import br.com.training.model.User;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserResponse {
+    @ApiModelProperty(value = "Id do usuário")
     private Long id;
 
+    @ApiModelProperty(value = "Nome do usuário")
     private String name;
 
+    @ApiModelProperty(value = "Email do usuário")
     private String email;
 
+    @ApiModelProperty(value = "CPF do usuário")
     private String cpf;
 
+    @ApiModelProperty(value = "Data de nascimento do usuário")
     private LocalDate birthDate;
 
     public UserResponse() {}
