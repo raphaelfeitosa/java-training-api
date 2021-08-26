@@ -333,3 +333,8 @@ Recursos disponíveis para acesso via api: `http://localhost:8080/api/v1`
     ```
 - Response 401 (Unauthorized)
 
+## Swagger
+
+`http://localhost:8080/api/swagger-ui.html`
+
+
