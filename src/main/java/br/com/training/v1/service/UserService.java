@@ -7,6 +7,8 @@ import br.com.training.repository.UserRepository;
 import br.com.training.v1.service.exceptions.UserException;
 import br.com.training.v1.constant.MessagesConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = {"users"})
 public class UserService implements IUserService {
 
     @Autowired
@@ -69,6 +72,8 @@ public class UserService implements IUserService {
         }
     }
 
+    @CachePut(key = "#id")
+    @Override
     @Transactional(readOnly = true)
     public UserResponse findById(Long id) {
         try {
@@ -82,6 +87,8 @@ public class UserService implements IUserService {
         }
     }
 
+    @CachePut(key = "#cpf")
+    @Override
     @Transactional(readOnly = true)
     public UserResponse findByCpf(String cpf) {
         try {
@@ -95,6 +102,8 @@ public class UserService implements IUserService {
         }
     }
 
+    @CachePut(key = "#email")
+    @Override
     @Transactional(readOnly = true)
     public UserResponse findByEmail(String email) {
         try {
@@ -108,6 +117,8 @@ public class UserService implements IUserService {
         }
     }
 
+    @CachePut(unless = "#result.size()<3")
+    @Override
     @Transactional(readOnly = true)
     public List<UserResponse> findAll() {
         try {
